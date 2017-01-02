@@ -293,9 +293,7 @@ bool			CliIRC::connect()
 		fullname = "";
 	if (password.length() > 0)
 		this->_client << "PASS " << password << "\n";
-	randnick = nickname.at(0) + this->_getRandString(9);
-	this->_nickname = randnick;
-	this->_client << "NICK " << randnick << "\n";
+	this->_client << "NICK " << nickname << "\n";
 	this->_client << "USER " << username << " " << username << " " << username << " :" << fullname << "\n";
 	this->_connected = true;
 	return (true);
@@ -3337,7 +3335,8 @@ void			CliIRC::_e_raw_alreadyused(std::string query)
 	std::string	randnick;
 
 	query = query;
-	randnick = this->_nickname.at(0) + this->_getRandString(9);
+	//randnick = this->_nickname.at(0) + this->_getRandString(9);
+	randnick = this->_nickname + "_";
 	this->_nickname = randnick;
 	this->_client << "NICK " << randnick << "\n";
 }
